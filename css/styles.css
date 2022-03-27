@@ -28,26 +28,31 @@ body {
   background: var(--bg);
   font-family: "Poppins", sans-serif;
 }
- 
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
 }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--white); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--blue); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-blue); 
+} 
 
 .container {
   width: min(90vw, 800px);
   margin: 0 auto;  
 }
-
-
 
 /* =============== Titles =============== */
 
@@ -119,8 +124,7 @@ button.navbar-toggler:hover:focus {
 }
 
 /* =============== Header =============== */
-.header-bg {
-  /* background: url("https://cdn.pixabay.com/photo/2014/10/23/10/10/dollars-499481_960_720.jpg"); */
+.header-bg {  
   background-color: var(--blue);
   background-blend-mode: color;
   padding: 2rem 0 8rem;
@@ -202,9 +206,12 @@ color: #fff;
 .card.total {
   background: var(--green);
   color: white;
-}
+} 
 
-/* =============== Table =============== */
+#search{ 
+  height: 40px;
+}
+/* =============== Table =============== */ 
 #transaction { 
   display: block;
   width: 100%;
@@ -392,6 +399,7 @@ font-size: 30px;
 
 /* =============== Responsive =============== */
 @media (min-width: 800px) {
+  
   html {
     font-size: 87.5%;
   }
@@ -401,15 +409,5 @@ font-size: 30px;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
-}
-
-.container-2 {
-  display: flex;
-  justify-content: space-between;
-}
-
-input[type="checkbox"] {
-  height: 0;
-  width: 0;
-  visibility: hidden;
 } 
+ 

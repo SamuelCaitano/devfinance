@@ -1,5 +1,7 @@
 <?php
 require_once("templates/head.php");
+require_once("config/globals.php");
+require_once("config/db.php");
 ?>
 
 <div class="v-100 w-100">  

@@ -1,7 +1,8 @@
 <?php
- 
+
 require_once("templates/header.php");
- 
+require_once("templates/calcFinance.php");
+
 $userData = $userDao->verifyToken(true);
 
 $userData = [];
@@ -14,36 +15,11 @@ $categories = $categoriesDao->findAll();
 
 $icons = $iconsDao->findAll();
 
-$somIncome = 0;
-$somExpense = 0;
-$income = 0;
-$expense = 0;
-$total = 0;
 
 ?>
 
 <main class="container">
-  <section id="balance"> 
-
-    <?php foreach ($finances as $finance) : ?>
-      <?php if ($finance->type === "income") {
-        $somIncome += $finance->price;
-      } else if ($finance->type === "expense") {
-        $somExpense += $finance->price;
-      }
-      ?>
-    <?php endforeach; ?>
-
-    <?php 
-    $first = substr($somIncome, 0, strlen($somIncome));
-    $second = substr($somExpense, 0, strlen($somExpense));
-    $income = str_replace(',', ',', str_replace('.', ',', $first)); 
-    $expense = str_replace(',', ',', str_replace('.', ',', $second)); 
-
-    // $total = ($income - $expense);
-    ?>
-
-
+  <section id="balance">
     <div class="card">
       <h3>
         <spam>Entradas</spam>
@@ -65,8 +41,13 @@ $total = 0;
         <span>Total</span>
         <img src="./img/total.svg" alt="Imagem Total">
       </h3>
-      <p id="totalDisplay">R$ <?= $total ?></p>
+      <?php if ($negative === true) : ?>
+        <p id="totalDisplay" class="text-danger">- R$ <?= $total ?></p>
+      <?php else : ?>
+        <p id="totalDisplay" class="text-white">R$ <?= $total ?></p>
+      <?php endif; ?>
     </div>
+
   </section>
 
   <?php
@@ -74,7 +55,7 @@ $total = 0;
   ?>
 
   <div class="collapse" id="income">
-    <div class=" p-4">
+    <div class="p-4">
       <h4>Nova Receita</h4>
       <span class="text-muted">preencha os campos abaixo e clique no botão <strong>"Enviar"</strong>.</span>
       <form action="<?= $BASE_URL ?>newfinance.php" method="POST">
@@ -83,9 +64,9 @@ $total = 0;
       </form>
     </div>
   </div>
-  
+
   <div class="collapse" id="expense">
-    <div class=" p-4">
+    <div class="p-4">
       <h4>Nova Despesa</h4>
       <span class="text-muted">preencha os campos abaixo e clique no botão <strong>"Enviar"</strong>.</span>
       <form action="<?= $BASE_URL ?>newfinance.php" method="POST">
@@ -95,26 +76,33 @@ $total = 0;
     </div>
   </div>
 
-  <div class="d-flex">
-    <!-- Collapse income -->
-    <nav class="navbar navbar-dark">
-      <div class="container-fluid">
-        <button class="navbar-toggler income" type="button" data-bs-toggle="collapse" data-bs-target="#income" aria-controls="income" aria-expanded="false" aria-label="Toggle navigation">
-          <span class=""><i class="fas fa-plus"></i> Receita</span>
-        </button>
-      </div>
-    </nav>
-    <!-- Collapse expense -->
-    <nav class="navbar navbar-dark">
-      <div class="container-fluid">
-        <button class="navbar-toggler bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#expense" aria-controls="expense" aria-expanded="false" aria-label="Toggle navigation">
-          <span class=""><i class="fas fa-minus"></i> Despesa</span>
-        </button>
-      </div>
-    </nav>
+  <div class="card-includes d-flex align-items-center">
+    <div class="col-md-6 d-flex">
+      <!-- Collapse income -->
+      <nav class="navbar navbar-dark col-md-6">
+        <div class="container-fluid">
+          <button class="navbar-toggler income" type="button" data-bs-toggle="collapse" data-bs-target="#income" aria-controls="income" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""><i class="fas fa-plus"></i> Receita</span>
+          </button>
+        </div>
+      </nav>
+      <!-- Collapse expense -->
+      <nav class="navbar navbar-dark col-md-6">
+        <div class="container-fluid">
+          <button class="navbar-toggler bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#expense" aria-controls="expense" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""><i class="fas fa-minus"></i> Despesa</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <div class="col-md-6">
+      <form action="#" method="GET" id="search-form" class="form-inline col-md-12">
+        <input type="text" name="q" id="search" class="form-control" type="search" placeholder="Buscar" aria-label="Search"> 
+      </form>
+    </div>
   </div>
 
-  <div id="transaction">    
+  <div id="transaction">
     <table id="data-table">
       <thead>
         <tr>

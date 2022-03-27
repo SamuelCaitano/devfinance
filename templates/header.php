@@ -34,13 +34,13 @@ if ($userData->image == "") {
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="profile.php">
+                  <a class="dropdown-item" href="#">
                     <img src="<?php $BASE_URL ?>img/users/<?= $userData->image ?>" alt="" id="photo__user-nav"> <?= $fullName ?>
                   </a>
                 </li>
                 <?php if ($userData->adm == 1) : ?>
                   <li>
-                    <a class="dropdown-item" href="<?php $BASE_URL ?>dashboard.php"><i class="fas fa-chart-line"></i><span class="title-itens">Dashboard</span></a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i><span class="title-itens">Dashboard</span></a>
                   </li>
                 <?php endif ?>
                 <li>
@@ -52,7 +52,7 @@ if ($userData->image == "") {
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item" href="editProfile.php "><i class="fas fa-tools"></i><span class="title-itens">Configurações</span></a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-tools"></i><span class="title-itens">Configurações</span></a>
                 </li>
                 <li>
                   <hr class="dropdown-divider">

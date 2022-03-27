@@ -124,4 +124,5 @@ class CategoriesDAO implements CategoriesDAOInterface
   public function findByTitle($name)
   {
   } 
+  
 }
