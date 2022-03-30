@@ -14,12 +14,10 @@ foreach ($finances as $finance) {
     $somExpense += $finance->price;
 }
 
-$som = $somIncome - $somExpense;
+$negative = $somIncome - $somExpense < 0 ? true : false; 
 
-$final = abs($som);
-
-$negative = $som < 0 ? true : false; 
+$som = abs($somIncome - $somExpense); 
 
 $income = number_format($somIncome, 2, ",", ".");
 $expense = number_format($somExpense, 2, ",", ".");
-$total = number_format($final, 2, ",", "."); 
+$total = number_format($som, 2, ",", "."); 
