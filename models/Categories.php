@@ -2,10 +2,8 @@
 
 class Categories {
   public $id;
-  public $description;
-  public $price;
-  public $date;
-  public $category;  
+  public $title;
+  public $icon_id;   
 }
 
 interface CategoriesDAOInterface {

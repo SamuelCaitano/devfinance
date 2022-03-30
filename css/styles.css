@@ -25,7 +25,9 @@ html {
 }
 
 body {
-  background: var(--bg);
+  /* background: var(--white); */
+  /* background: var(--bg); */
+  background-color: whitesmoke;
   font-family: "Poppins", sans-serif;
 }
 
@@ -341,7 +343,17 @@ td.description {
 
 /* =============== Show Finance and Edit Finance =============== */
 #view-contact-container { 
-  width: 500px;
+  /* border: 2px solid red; */
+  width: 100vw;
+  max-width: 500px;
+  min-width: 300px;
+  overflow: hidden;
+  /* background: var(--white); */
+  padding: 1.5rem 2rem;
+  /* border-radius: 0.25rem;
+  margin-bottom: 2rem; */
+  /* color: var(--dark-blue); */
+  /* transition: 0.5s; */
 }
 .camp-title {
   height: max-content; 

@@ -1,15 +1,19 @@
 <?php
 
 require_once("templates/header.php");
-require_once("templates/calcFinance.php");
+require_once("models/calcFinance.php");
+
+// var_dump($_SESSION);
 
 $userData = $userDao->verifyToken(true);
 
-$userData = [];
+// $userData = [];
 
-$userData = $userDao->findAll();
+$userData = $userDao->findByToken($_SESSION["token"]);
 
-$finances = $financeDao->findAll();
+$user_id = $userData->id;
+  
+$finances = $financeDao->findAll($user_id);
 
 $categories = $categoriesDao->findAll();
 

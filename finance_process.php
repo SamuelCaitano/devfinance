@@ -17,12 +17,12 @@ $type = filter_input(INPUT_POST, "type");
 
 // Verificação do tipo de formulário
 if ($type === "update") {
-
+  
   $id = filter_input(INPUT_POST, "id");
   $description = filter_input(INPUT_POST, "description");
   $price = filter_input(INPUT_POST, "price");
   $date = filter_input(INPUT_POST, "date");
-  $category_id = filter_input(INPUT_POST, "category_id");
+  $category_id = filter_input(INPUT_POST, "category_id"); 
 
   $finance = new Finance();
 

@@ -1,16 +1,16 @@
 <div class="col-md-6">
   <input type="hidden" name="type_form" value="create">
   <div class="form-group">
-    <input class="form-control" type="text" name="description" placeholder="Descrição">
+    <input class="form-control" type="text" name="description" placeholder="Descrição" required>
   </div>
   <div class="form-group">
-    <input class="form-control" type="text" name="price" placeholder="R$ 0,00">
+    <input class="form-control" type="text" name="price" placeholder="R$ 0,00" required>
   </div>
   <div class="form-group">
-    <input class="form-control" type="date" name="date" placeholder="Data vencmento">
+    <input class="form-control" type="date" name="date" placeholder="Data vencmento" required>
   </div>
   <div class="form-group">
-    <select class="form-control" name="category_id" >
+    <select class="form-control" name="category_id" required>
       <?php foreach ($categories as $category) : ?>
         <option value="<?= $category->id ?>">
           <?php if ($category->icon_id) : ?>

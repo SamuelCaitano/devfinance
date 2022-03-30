@@ -1,11 +1,11 @@
 <?php
-require_once("templates/head.php");
-
-$userData = $userDao->verifyToken(true);
+require_once("templates/head.php"); 
 
 $userData = [];
 
-$userData = $userDao->findAll();
+$userData = $userDao->findByToken($_SESSION["token"]);
+
+$user_id = $userData->id;
 
 $fullName = $user->getFullName($userData);
 
@@ -42,7 +42,7 @@ if ($userData->image == "") {
                   <li>
                     <a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i><span class="title-itens">Dashboard</span></a>
                   </li>
-                <?php endif ?>
+                <?php endif; ?>
                 <li>
                   <hr class="dropdown-divider">
                 </li>

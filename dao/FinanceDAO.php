@@ -55,8 +55,7 @@ class FinanceDAO implements FinanceDAOInterface
   }
 
   public function update(Finance $finance)
-  {
-
+  {  
     $stmt = $this->conn->prepare("UPDATE finance SET
       description = :description,
       price = :price,
@@ -72,8 +71,7 @@ class FinanceDAO implements FinanceDAOInterface
     $stmt->bindParam(":id", $finance->id);
 
     $stmt->execute();
-
-    // Mensagem de sucesso 
+ 
     $this->message->setMessage("Atualização realizada com sucesso!", "success", "index.php");
   }
 
@@ -89,11 +87,12 @@ class FinanceDAO implements FinanceDAOInterface
     $this->message->setMessage("Excluido com sucesso!", "success", "index.php");
   }
 
-  public function findAll()
-  {
-    $finances = [];
-
-    $stmt = $this->conn->query("SELECT * FROM finance ORDER BY id DESC");
+  public function findAll($user_id)
+  { 
+    $stmt = $this->conn->query("SELECT * FROM finance
+     WHERE user_id = $user_id
+     ORDER BY date DESC
+     ");     
 
     $stmt->execute();
 
@@ -167,18 +166,18 @@ class FinanceDAO implements FinanceDAOInterface
   public function calculate()
   {
 
-    $finances = $this->findAll();
+    // $finances = $this->findAll($id);
 
-    foreach ($finances as $finance);
-    var_dump($finance); exit;
-    for ($i = 0; $i < count($finance); $i++) {
-    }
+    // foreach ($finances as $finance);
+    // var_dump($finance); exit;
+    // for ($i = 0; $i < count($finance); $i++) {
+    // }
   }
 
   public function income(FinanceDAO $finance)
   {
 
-    $finance->findAll();
+    // $finance->findAll($id);
 
     var_dump($finance);
   }

@@ -1,7 +1,7 @@
 <?php
 
 require_once("models/User.php");
-require_once("models/Message.php"); 
+require_once("models/Message.php");
 
 class UserDAO implements UserDAOInterface
 {
@@ -24,10 +24,10 @@ class UserDAO implements UserDAOInterface
     $user->name = $data["name"];
     $user->lastname = $data["lastname"];
     $user->email = $data["email"];
-    $user->password = $data["password"]; 
-    $user->image = $data["image"];     
-    $user->token = $data["token"]; 
-    $user->registration_date = $data["registration_date"]; 
+    $user->password = $data["password"];
+    $user->image = $data["image"];
+    $user->token = $data["token"];
+    $user->registration_date = $data["registration_date"];
     $user->adm = $data["adm"];
 
     return $user;
@@ -44,15 +44,14 @@ class UserDAO implements UserDAOInterface
     $stmt->bindParam(":name", $user->name);
     $stmt->bindParam(":lastname", $user->lastname);
     $stmt->bindParam(":email", $user->email);
-    $stmt->bindParam(":password", $user->password); 
-    $stmt->bindParam(":image", $user->image); 
-    $stmt->bindParam(":token", $user->token); 
-    $stmt->bindParam(":registration_date", $user->registration_date); 
-    $stmt->bindParam(":adm", $user->adm); 
+    $stmt->bindParam(":password", $user->password);
+    $stmt->bindParam(":image", $user->image);
+    $stmt->bindParam(":token", $user->token);
+    $stmt->bindParam(":registration_date", $user->registration_date);
+    $stmt->bindParam(":adm", $user->adm);
 
     $stmt->execute();
-
-    // Autenticar usuário, caso auth seja true
+ 
     if ($authUser) {
       $this->setTokenToSession($user->token);
     }
@@ -75,18 +74,17 @@ class UserDAO implements UserDAOInterface
     $stmt->bindParam(":name", $user->name);
     $stmt->bindParam(":lastname", $user->lastname);
     $stmt->bindParam(":email", $user->email);
-    $stmt->bindParam(":password", $user->password); 
-    $stmt->bindParam(":image", $user->image); 
-    $stmt->bindParam(":token", $user->token); 
-    $stmt->bindParam(":registration_date", $user->registration_date); 
-    $stmt->bindParam(":adm", $user->adm); 
+    $stmt->bindParam(":password", $user->password);
+    $stmt->bindParam(":image", $user->image);
+    $stmt->bindParam(":token", $user->token);
+    $stmt->bindParam(":registration_date", $user->registration_date);
+    $stmt->bindParam(":adm", $user->adm);
     $stmt->bindParam(":id", $user->id);
 
     $stmt->execute();
 
     if ($redirect) {
 
-      // Redireciona para o perfil do usuario
       $this->message->setMessage("Dados atualizados com sucesso!", "success", "editprofile.php");
     }
   }
@@ -94,8 +92,7 @@ class UserDAO implements UserDAOInterface
   {
     // Verifica se existe um token setado
     if (!empty($_SESSION["token"])) {
-
-      // Pega o token da session
+ 
       $token = $_SESSION["token"];
 
       $user = $this->findByToken($token);
@@ -103,78 +100,73 @@ class UserDAO implements UserDAOInterface
       if ($user) {
         return $user;
       } else if ($protected) {
-
-        // Redireciona usuário não autenticado
+ 
         $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "auth.php");
       }
     } else if ($protected) {
-
-      // Redireciona usuário não autenticado
+ 
       $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "auth.php");
     }
   }
   public function setTokenToSession($token, $redirect = true)
   {
-    // Salvar token na session
     $_SESSION["token"] = $token;
 
     if ($redirect) {
 
-      // Redireciona para o perfil do usuario
       $this->message->setMessage("Seja bem-vindo!", "success", "index.php");
     }
   }
 
   public function authenticateUser($email, $password)
-  { 
-    $user = $this->findByEmail($email);  
-    var_dump($user);
+  {
+    $user = $this->findByEmail($email);
+
     if ($user) {
 
       // Checar se as senhas batem
       if (password_verify($password, $user->password)) {
 
-        // Gerar um token e inserir na session
         $token = $user->generateToken();
 
         $this->setTokenToSession($token, false);
 
-        // Atualizar token no usuário
         $user->token = $token;
-        
-        $this->update($user, false);
-        
-        return true;
 
+        $this->update($user, false);
+
+        return true;
       } else {
+
         return false;
       }
     } else {
+
       return false;
     }
   }
   public function findAll()
-  { 
-      $stmt = $this->conn->prepare("SELECT * FROM users ORDER BY name");
- 
-      $stmt->execute();
-      
-      if ($stmt->rowCount() > 0) {
+  {
+    $stmt = $this->conn->prepare("SELECT * FROM users ORDER BY name");
 
-        $data = $stmt->fetch();
+    $stmt->execute();
 
-        $user = $this->buildUser($data); 
+    if ($stmt->rowCount() > 0) {
 
-        return $user;
+      $data = $stmt->fetch();
 
-      } else {
+      $user = $this->buildUser($data);
 
-        return false;
-      } 
+      return $user;
+    } else {
+
+      return false;
+    }
   }
   public function findByName($name)
   {
   }
+
   public function findByEmail($email)
   {
     if ($email != "") {
@@ -185,15 +177,14 @@ class UserDAO implements UserDAOInterface
 
       $stmt->execute();
 
-      
+
       if ($stmt->rowCount() > 0) {
 
         $data = $stmt->fetch();
 
-        $user = $this->buildUser($data); 
+        $user = $this->buildUser($data);
 
         return $user;
-
       } else {
 
         return false;
@@ -203,6 +194,7 @@ class UserDAO implements UserDAOInterface
       return false;
     }
   }
+
   public function findById($id)
   {
     if ($id != "") {
@@ -226,9 +218,9 @@ class UserDAO implements UserDAOInterface
       return false;
     }
   }
+
   public function findByToken($token)
-  {
-    // Verifica se o valor da váriavel passada nos parâmetros é diferente de vazio
+  { 
     if ($token != "") {
 
       $stmt = $this->conn->prepare("SELECT * FROM users WHERE token = :token ");
@@ -237,32 +229,26 @@ class UserDAO implements UserDAOInterface
 
       $stmt->execute();
 
-      // Verifica se há algum retorno de dado
       if ($stmt->rowCount() > 0) {
 
-        // Busca apenas um retorno, pois, não havera mais de um email igual
         $data = $stmt->fetch();
 
         $user = $this->buildUser($data);
 
-        // Recebe o retorno do método buildUser e retorna true para o auth_process.php
         return $user;
       } else {
 
         return false;
       }
-    } else {
+    } else { 
 
-      // Essa condição não será acessada, se, no front o input for declarado required
       return false;
     }
   }
   public function destroyToken()
   {
-    // Remove o token da session
     $_SESSION["token"] = "";
 
-    // Redirecionar e apresentar a mensagem de sucesso
     $this->message->setMessage("Logout realizado com sucesso", "success", "auth.php");
   }
   public function changePassword(User $user)

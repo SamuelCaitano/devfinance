@@ -1,12 +1,11 @@
 <?php
 require_once("templates/head.php");
-require_once("config/globals.php");
-require_once("config/db.php");
+
 ?>
 
-<div class="v-100 w-100">  
+<div class="v-100 w-100">
   <div id="auth-row">
-    <div class="mx-auto col-md-4 border border-secondary rounded p-5 bg-light " id="login-container">
+    <div class="col-md-4 border border-secondary rounded p-5 bg-light" id="login-container">
       <div class="text-center">
         <img src="./img/logo.png" alt="Logo Dev Finance">
       </div>
@@ -24,13 +23,13 @@ require_once("config/db.php");
         </div>
         <div class="form-group">
           <input type="submit" title="Entrar" class="btn btn-primary mt-3 card-btn form-control" value="Entrar">
-        </div>
+        </div>        
       </form>
     </div>
   </div>
-  <div class="mx-auto col-md-4 message-alert">
-  <?php
-  require_once("templates/message_alert.php");
-  ?>
+  <div class="col-md-4 message-alert">
+    <?php
+    require_once("templates/message_alert.php");
+    ?>
   </div>
 </div>

@@ -17,12 +17,11 @@ $categoriesDao = new CategoriesDAO($conn, $BASE_URL);
 $iconsDao = new IconsDAO($conn, $BASE_URL);
 
 
-$userData = $userDao->verifyToken(false);
+$userData = $userDao->verifyToken(true);
 
 $flassMessage = $message->getMessage();
 
-if(!empty($flassMessage["msg"])) {
-  // Limpar a mensagem
+if(!empty($flassMessage["msg"])) { 
   $message->clearMessage();
 }
 

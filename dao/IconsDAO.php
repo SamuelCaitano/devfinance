@@ -17,7 +17,7 @@ class IconsDAO implements IconsDAOInterface
 
   public function buildIcons($data)
   {
-    $icons = new Categories();
+    $icons = new Icons();
 
     $icons->id = $data["id"];
     $icons->title = $data["title"]; 
@@ -67,9 +67,8 @@ class IconsDAO implements IconsDAOInterface
     $stmt->bindParam(":id", $id);
 
     $stmt->execute();
-
-    // Mensagem de sucesso por remover filme
-    $this->message->setMessage("Categoria removida com sucesso!", "success", "index.php");
+ 
+    $this->message->setMessage("Icone removida com sucesso!", "success", "index.php");
   }
 
   public function findAll()
