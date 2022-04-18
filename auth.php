@@ -15,11 +15,11 @@ require_once("templates/head.php");
         <input type="hidden" name="type" value="login">
         <div class="form-group">
           <label for="email">E-mail:</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" title="Digite seu e-mail" autocomplete="off" required>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" title="Digite seu e-mail" autocomplete="on" required>
         </div>
         <div class="form-group">
           <label for="password">Senha:</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" title="Digite sua senha" autocomplete="off" required>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" title="Digite sua senha" autocomplete="on" required>
         </div>
         <div class="form-group">
           <input type="submit" title="Entrar" class="btn btn-primary mt-3 card-btn form-control" value="Entrar">

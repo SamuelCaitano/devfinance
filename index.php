@@ -1,13 +1,12 @@
-<?php
+<?php 
 
+require_once("templates/head.php"); 
 require_once("templates/header.php");
 require_once("models/calcFinance.php");
-
-// var_dump($_SESSION);
-
+ 
 $userData = $userDao->verifyToken(true);
 
-// $userData = [];
+$userData = [];
 
 $userData = $userDao->findByToken($_SESSION["token"]);
 

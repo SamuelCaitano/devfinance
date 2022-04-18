@@ -1,4 +1,6 @@
 <?php
+var_dump($_SESSION);die;
+
 require_once("templates/head.php"); 
 
 $userData = [];
